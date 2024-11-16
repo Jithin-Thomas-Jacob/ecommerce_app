@@ -6,10 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity_checkout">
-
-    <!-- Toolbar -->
+    
     <TextView
-        android:id="@+id/toolbar_title"
+        android:id="@+id/checkout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
@@ -28,7 +27,7 @@
         android:id="@+id/scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_title"
+        app:layout_constraintTop_toBottomOf="@id/checkout_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -147,7 +146,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Delivery Address Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/delivery_address_card"
                 android:layout_width="match_parent"
@@ -180,7 +178,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Payment Method Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/payment_method_card"
                 android:layout_width="match_parent"
@@ -229,7 +226,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Total and Confirm Order -->
             <LinearLayout
                 android:id="@+id/total_and_confirm"
                 android:layout_width="match_parent"
