@@ -8,9 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".details_activity">
 
-    <!-- Product Image -->
-
-    <!-- LinearLayout for Title and Price -->
     <ImageView
         android:id="@+id/product_img"
         android:layout_width="0dp"
@@ -34,7 +31,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
 
-        <!-- Product Title -->
         <TextView
             android:id="@+id/product_title"
             android:layout_width="match_parent"
@@ -44,7 +40,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Product Price -->
         <TextView
             android:id="@+id/product_price"
             android:layout_width="wrap_content"
@@ -56,7 +51,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Product Description Label -->
     <TextView
         android:id="@+id/product_description_label"
         android:layout_width="wrap_content"
@@ -69,14 +63,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_price_container" />
-
-    <!-- Product Description Text -->
-
-    <!-- Quantity Selector -->
-
-    <!-- Add to Cart Button -->
-
-    <!-- Buy Now Button -->
 
     <TextView
         android:id="@+id/product_description_text"
@@ -104,8 +90,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/product_description_text">
 
-
-        <!-- Quantity Label -->
         <TextView
             android:id="@+id/quantity_label"
             android:layout_width="wrap_content"
@@ -130,7 +114,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/quantity_selector_container" />
-
 
         <TextView
             android:id="@+id/quantity_display"
