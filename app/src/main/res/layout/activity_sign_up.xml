@@ -91,7 +91,6 @@
                 android:id="@+id/repeat_password_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:hint="Repeat Password"
                 android:inputType="textPassword"
                 android:padding="12dp" />
