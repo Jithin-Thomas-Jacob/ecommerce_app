@@ -23,7 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Order Summary Section -->
         <androidx.cardview.widget.CardView
             android:id="@+id/order_summary_card"
             android:layout_width="0dp"
@@ -41,7 +40,8 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Title -->
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -50,7 +50,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- Items -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,17 +58,56 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <Button
+                    android:id="@+id/increment_button"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:backgroundTint="@color/primary"
+                    android:text="+"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quantity_selector_container" />
+
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/quantity_display"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="• Additional Item Example - $199.00"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text="1"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/decrement_button"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:backgroundTint="@color/primary"
+                    android:text="-"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quantity_selector_container" />
+            </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Delivery Address Section -->
         <androidx.cardview.widget.CardView
             android:id="@+id/delivery_address_card"
             android:layout_width="0dp"
@@ -87,7 +125,6 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Title -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,7 +133,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- Address -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,11 +141,9 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <!-- Change Address Button -->
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Payment Method Section -->
         <androidx.cardview.widget.CardView
             android:id="@+id/payment_method_card"
             android:layout_width="0dp"
@@ -127,7 +161,6 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Title -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,13 +169,35 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- Selected Payment Method -->
+                <RadioGroup
+                    android:id="@+id/payment_method_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp">
 
-                <!-- Change Payment Method Button -->
+                    <RadioButton
+                        android:id="@+id/radio_card_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pay by Card"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_cash_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cash on Delivery"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </RadioGroup>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Total and Confirm Button -->
+
         <LinearLayout
             android:id="@+id/total_and_confirm"
             android:layout_width="0dp"
@@ -154,7 +209,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <!-- Total Amount -->
             <TextView
                 android:id="@+id/total_price"
                 android:layout_width="match_parent"
@@ -165,7 +219,6 @@
                 android:textStyle="bold"
                 android:gravity="center" />
 
-            <!-- Confirm Order Button -->
             <Button
                 android:id="@+id/confirm_order_button"
                 android:layout_width="match_parent"
