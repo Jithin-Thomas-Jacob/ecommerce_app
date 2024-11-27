@@ -24,7 +24,7 @@
     <!-- CardView Container -->
 
     <TextView
-        android:id="@+id/login_title"
+        android:id="@+id/signUp_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/login_form"
+        android:id="@+id/signUp_form"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
@@ -47,7 +47,7 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_title"
+        app:layout_constraintTop_toBottomOf="@id/signUp_title"
         app:layout_constraintVertical_bias="0.3">
 
         <LinearLayout
@@ -97,11 +97,38 @@
                 android:padding="12dp" />
 
             <EditText
-                android:id="@+id/address_text"
+                android:id="@+id/address_Street"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Address"
+                android:hint="Street Name"
+                android:inputType="textPostalAddress"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/address_City"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="City"
+                android:inputType="textPostalAddress"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/address_Province"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Province"
+                android:inputType="textPostalAddress"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/address_Country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Country"
                 android:inputType="textPostalAddress"
                 android:padding="12dp" />
 
@@ -110,12 +137,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Postal Code"
-                android:inputType="number"
+                android:inputType="textPostalAddress"
                 android:padding="12dp" />
 
 
             <Button
-                android:id="@+id/login_button"
+                android:id="@+id/signUp_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -142,6 +169,7 @@
                 <Button
                     android:layout_width="66dp"
                     android:layout_height="36dp"
+                    android:id="@+id/toLogin"
                     android:backgroundTint="@color/primary"
                     android:padding="1sp"
                     android:text="Login" />
