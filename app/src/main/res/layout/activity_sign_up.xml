@@ -166,13 +166,19 @@
                     android:textColor="@color/black"
                     android:textSize="17dp" />
 
-                <Button
-                    android:layout_width="66dp"
-                    android:layout_height="36dp"
+                <TextView
                     android:id="@+id/toLogin"
+                    android:layout_width="66dp"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@color/primary"
                     android:padding="1sp"
-                    android:text="Login" />
+                    android:text="Login"
+                    android:textAlignment="center"
+                    android:textSize="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
 
         </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,7 +24,8 @@ import java.util.Map;
 
 public class signUp_activity extends AppCompatActivity {
 
-    Button toLogin, signUp_button;
+    Button signUp_button;
+    TextView toLogin;
     private FirebaseAuth signUpAuth;
     private DatabaseReference databaseReference;
     private EditText firstName_text, lastName_text, email_text, password_text, repeat_password_text, address_Street, address_City,address_Province, address_Country, postal_code_text;
@@ -33,6 +35,7 @@ public class signUp_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up);
+        Toast.makeText(this, "Sign Up Activity Launched", Toast.LENGTH_SHORT).show();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -56,7 +59,7 @@ public class signUp_activity extends AppCompatActivity {
         Button signUp = findViewById(R.id.signUp_button);
         signUp.setOnClickListener(view -> register());
 
-        Button start = findViewById(R.id.toLogin);
+        TextView start = findViewById(R.id.toLogin);
         start.setOnClickListener(view -> {
             Intent intent = new Intent(signUp_activity.this, login_activity.class);
             startActivity(intent);
