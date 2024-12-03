@@ -48,5 +48,44 @@
             android:padding="8dp"
             android:text="Add to Cart"
             android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:id="@+id/layoutQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonDecrease"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/primary"
+                android:text="-"
+                android:textSize="18sp"
+                android:padding="4dp"
+                android:gravity="center"
+                android:minWidth="40dp"
+                android:minHeight="40dp"/>
+
+            <TextView
+                android:id="@+id/textQuantity"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/buttonIncrease"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/primary"
+                android:text="+"
+                android:textSize="18sp"
+                android:padding="4dp"
+                android:gravity="center"
+                android:minWidth="40dp"
+                android:minHeight="40dp"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

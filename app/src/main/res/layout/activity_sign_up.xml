@@ -170,7 +170,7 @@
                     android:id="@+id/toLogin"
                     android:layout_width="66dp"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/primary"
                     android:padding="1sp"
                     android:text="Login"
                     android:textAlignment="center"

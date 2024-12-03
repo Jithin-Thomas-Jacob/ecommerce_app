@@ -1,7 +1,9 @@
 package com.example.ecommerceapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,7 @@ public class activity_product extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private List<Product> productList;
     private FirebaseFirestore db;
+    ImageView toCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,13 @@ public class activity_product extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         fetchProducts();
+
+        ImageView toCart = findViewById(R.id.toCart);
+        toCart.setOnClickListener(view -> {
+            Intent cartIntent = new Intent(this, Cart_activity.class);
+            startActivity(cartIntent);
+        });
+
     }
 
     private void fetchProducts() {
@@ -58,9 +68,18 @@ public class activity_product extends AppCompatActivity {
                             List<Map<String, Object>> products = (List<Map<String, Object>>) document.get("products");
                             if (products != null) {
                                 for (Map<String, Object> productMap : products) {
+                                    String Id;
+                                    Object idObject = productMap.get("id");
+                                    if (idObject instanceof Long) {
+                                        Id = String.valueOf(idObject); // Convert Long to String
+                                    } else if (idObject instanceof String) {
+                                        Id = (String) idObject;
+                                    } else {
+                                        Id = ""; // Default to empty if type is unsupported
+                                    }
+
                                     String title = (String) productMap.get("title");
                                     String image = (String) productMap.get("image");
-
 
                                     Object priceObject = productMap.get("price");
                                     int price = 0;
@@ -74,8 +93,7 @@ public class activity_product extends AppCompatActivity {
                                         }
                                     }
 
-
-                                    Product product = new Product(title, price, image);
+                                    Product product = new Product(Id, title, price, image);
                                     productList.add(product);
                                 }
                             }
@@ -86,6 +104,7 @@ public class activity_product extends AppCompatActivity {
                     }
                 });
     }
+
 
 
 }

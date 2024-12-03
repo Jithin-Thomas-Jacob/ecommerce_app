@@ -16,15 +16,17 @@
         android:textColor="@color/primary"
         android:textSize="25dp"
         android:layout_marginLeft="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/toCart"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/toCart"
         android:layout_width="50dp"
         android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/cart_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
+        android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

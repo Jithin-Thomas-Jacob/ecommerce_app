@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.ecommerceapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.ecommerceapp"
@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
+    implementation(libs.media3.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
