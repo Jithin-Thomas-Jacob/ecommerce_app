@@ -55,7 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             intent.putExtra("productPrice", product.getPrice());
             intent.putExtra("productImage", product.getImage());
             intent.putExtra("productDescription", product.getDescription());
-            intent.putExtra("productDetails", product.getItemDetails());
+            intent.putExtra("itemDetails", product.getItemDetails());
             context.startActivity(intent);
         });
 
@@ -76,7 +76,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         // "Add to Cart" button logic
         holder.buttonAddToCart.setOnClickListener(view -> {
             CartManager.getInstance().addToCart(
-                    new CartItem(product.getId(), product.getTitle(), product.getImage(), product.getPrice(), 1)
+                    new CartItem(product.getId(), product.getTitle(), product.getImage(), product.getPrice(), 1, product.getDescription(), product.getItemDetails())
             );
             notifyItemChanged(position); // Refresh the UI
         });

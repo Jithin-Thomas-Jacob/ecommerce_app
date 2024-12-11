@@ -58,6 +58,13 @@ public class activity_product extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        productAdapter.notifyDataSetChanged();
+    }
+
+
     private void fetchProducts() {
         db.collection("products")
                 .get()

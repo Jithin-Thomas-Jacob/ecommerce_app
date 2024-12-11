@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class login_activity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    Button toSignUp;
+    TextView toSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class login_activity extends AppCompatActivity {
                     });
         });
 
-        Button start = findViewById(R.id.toSignUp);
+        TextView start = findViewById(R.id.toSignUp);
         start.setOnClickListener(view -> {
             Intent intent = new Intent(login_activity.this, signUp_activity.class);
             startActivity(intent);

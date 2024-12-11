@@ -7,13 +7,17 @@ public class CartItem {
     private double price;
     private String image;
     private int quantity;
+    private String description;
+    private String itemDetails;
 
-    public CartItem(String Id ,String title, String image, double price, int quantity){
+    public CartItem(String Id ,String title, String image, double price, int quantity, String description, String itemDetails){
         this.Id = Id;
         this.title = title;
         this.image = image;
         this.price = price;
         this.quantity = quantity;
+        this.description = description;
+        this.itemDetails = itemDetails;
     }
 
     public String getId(){
@@ -38,5 +42,13 @@ public class CartItem {
 
     public void setQuantity(int quantity){
         this.quantity = quantity;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public String getItemDetails(){
+        return itemDetails;
     }
 }

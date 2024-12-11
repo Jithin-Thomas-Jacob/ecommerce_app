@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,11 @@ import java.util.List;
 public class Cart_activity extends AppCompatActivity {
 
     private RecyclerView cartRecyclerView;
-    private TextView totalPriceTextView;
+    private TextView subTotalTextView, taxTextView, totalPriceTextView, emptyCartMessage;
     private CartAdapter cartAdapter;
     private List<CartItem> cartItems;
+
+    private static final double TAX_RATE = 0.13; // 13% tax
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,30 +37,52 @@ public class Cart_activity extends AppCompatActivity {
         });
 
         cartRecyclerView = findViewById(R.id.cartRecyclerView);
+        subTotalTextView = findViewById(R.id.subTotalPrice);
+        taxTextView = findViewById(R.id.tax);
         totalPriceTextView = findViewById(R.id.totalPrice);
+        emptyCartMessage = findViewById(R.id.emptyCartMessage);
 
         cartItems = new ArrayList<>(CartManager.getInstance().getCart().values());
         Log.d("CartActivity", "Cart items: " + cartItems);
-
-        if (cartItems.isEmpty()) {
-            Log.d("CartActivity", "Cart is empty!");
-        } else {
-            Log.d("CartActivity", "Cart contains items!");
-        }
 
         cartAdapter = new CartAdapter(cartItems, this::updateTotalPrice);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         cartRecyclerView.setAdapter(cartAdapter);
 
+        updateCartUI();
         updateTotalPrice();
     }
 
-    private void updateTotalPrice(){
-        int totalPrice = 0;
-        for(CartItem item: cartItems){
-            totalPrice += item.getPrice() * item.getQuantity();
+    private void updateCartUI() {
+        if (cartItems.isEmpty()) {
+            // Show empty cart message and hide RecyclerView
+            emptyCartMessage.setVisibility(View.VISIBLE);
+            cartRecyclerView.setVisibility(View.GONE);
+        } else {
+            // Hide empty cart message and show RecyclerView
+            emptyCartMessage.setVisibility(View.GONE);
+            cartRecyclerView.setVisibility(View.VISIBLE);
         }
-        totalPriceTextView.setText("Total: $"+ totalPrice);
+
+        updateTotalPrice();
+    }
+
+    private void updateTotalPrice() {
+        double subTotal = 0.0;
+
+        // Calculate subtotal
+        for (CartItem item : cartItems) {
+            subTotal += item.getPrice() * item.getQuantity();
+        }
+
+        // Calculate tax and total
+        double tax = subTotal * TAX_RATE;
+        double total = subTotal + tax;
+
+        // Update UI
+        subTotalTextView.setText(String.format("Sub Total: $%.2f", subTotal));
+        taxTextView.setText(String.format("Tax: $%.2f", tax));
+        totalPriceTextView.setText(String.format("Total: $%.2f", total));
     }
 
     @Override
@@ -73,7 +98,7 @@ public class Cart_activity extends AppCompatActivity {
         cartAdapter.notifyDataSetChanged();
 
         // Update the total price
+        updateCartUI();
         updateTotalPrice();
     }
-
 }

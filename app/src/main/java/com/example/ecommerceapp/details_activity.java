@@ -30,6 +30,19 @@ public class details_activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ImageView backButton = findViewById(R.id.backButton);
+        String source = getIntent().getStringExtra("source");
+
+        backButton.setOnClickListener(v -> {
+            if ("CartActivity".equals(source)){
+                Intent intent = new Intent(details_activity.this, Cart_activity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(details_activity.this, activity_product.class);
+                startActivity(intent);
+            }
+            finish();
+        });
 
         // Initialize the CartManager singleton
         cartManager = CartManager.getInstance();
@@ -37,8 +50,9 @@ public class details_activity extends AppCompatActivity {
         // Retrieve product details from the Intent
         String productId = getIntent().getStringExtra("productId");
         String productTitle = getIntent().getStringExtra("productTitle");
-        String productDescription = getIntent().getStringExtra("productDescription");
         double productPrice = getIntent().getDoubleExtra("productPrice", 0.00);
+        String productDescription = getIntent().getStringExtra("productDescription");
+        String productDetails = getIntent().getStringExtra("itemDetails");
         String productImage = getIntent().getStringExtra("productImage");
 
         // Find views
@@ -46,6 +60,7 @@ public class details_activity extends AppCompatActivity {
         TextView productTitleView = findViewById(R.id.product_title);
         TextView productPriceView = findViewById(R.id.product_price);
         TextView productDescriptionView = findViewById(R.id.product_description);
+        TextView productDetailsView = findViewById(R.id.product_details);
         Button addToCartButton = findViewById(R.id.add_to_cart_button);
         Button buyNowButton = findViewById(R.id.buy_now_button);
 
@@ -53,6 +68,7 @@ public class details_activity extends AppCompatActivity {
         productTitleView.setText(productTitle != null ? productTitle : "No Title");
         productPriceView.setText("Price: $" + String.format("%.2f", productPrice));
         productDescriptionView.setText(productDescription != null ? productDescription : "No Description");
+        productDetailsView.setText(productDetails != null ? productDetails : "No Details");
 
         Glide.with(this)
                 .load(productImage)
@@ -76,7 +92,7 @@ public class details_activity extends AppCompatActivity {
         addToCartButton.setOnClickListener(v -> {
             if (cartItem == null) {
                 // Add the item to the cart
-                cartManager.addToCart(new CartItem(productId, productTitle, productImage, productPrice, 1));
+                cartManager.addToCart(new CartItem(productId, productTitle, productImage, productPrice, 1, productDescription, productDetails));
             } else if (cartItem.getQuantity() < 10) {
                 // Increase the quantity if less than 10
                 cartManager.updateQuantity(productId, cartItem.getQuantity() + 1);

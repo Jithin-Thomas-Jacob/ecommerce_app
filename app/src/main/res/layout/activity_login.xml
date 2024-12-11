@@ -9,11 +9,12 @@
     android:background="@color/black"
     tools:context=".login_activity">
 
+    <!-- Background Image -->
     <ImageView
         android:id="@+id/login_img"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:alpha="0.5"
+        android:alpha="0.4"
         android:scaleType="centerCrop"
         android:src="@drawable/login_img"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Title -->
     <TextView
         android:id="@+id/login_title"
         android:layout_width="wrap_content"
@@ -35,82 +37,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- CardView Container -->
+    <!-- CardView for Form -->
     <androidx.cardview.widget.CardView
         android:id="@+id/login_form"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
-        android:backgroundTint="@color/transparent"
+        app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
+        app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_title"
         app:layout_constraintVertical_bias="0.3">
 
-        <!-- LinearLayout inside CardView for form fields -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Email Input Field -->
+            <!-- Email Input -->
             <EditText
                 android:id="@+id/email_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username or Email"
                 android:inputType="textEmailAddress"
-                android:padding="12dp" />
+                android:padding="16dp" />
 
-            <!-- Password Input Field -->
+            <!-- Password Input -->
             <EditText
                 android:id="@+id/password_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:padding="12dp" />
+                android:padding="16dp" />
 
             <!-- Login Button -->
             <Button
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:backgroundTint="@color/primary"
-                android:padding="12dp"
+                android:elevation="6dp"
+                android:padding="16dp"
                 android:text="Login"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
+            <!-- Sign-Up Redirect -->
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="298dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Don't have an account yet? | "
-                    android:textAlignment="center"
+                    android:text="Don't have an account?"
                     android:textColor="@color/black"
-                    android:textSize="17dp" />
+                    android:textSize="14sp" />
 
-                <Button
-                    android:layout_width="66dp"
+                <TextView
                     android:id="@+id/toSignUp"
-                    android:layout_height="36dp"
-                    android:padding="1sp"
-                    android:backgroundTint="@color/primary"
-                    android:text="Sign Up" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Sign Up"
+                    android:textColor="@color/primary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

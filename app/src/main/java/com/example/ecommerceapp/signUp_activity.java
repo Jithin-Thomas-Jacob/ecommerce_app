@@ -28,7 +28,7 @@ public class signUp_activity extends AppCompatActivity {
     TextView toLogin;
     private FirebaseAuth signUpAuth;
     private DatabaseReference databaseReference;
-    private EditText firstName_text, lastName_text, email_text, password_text, repeat_password_text, address_Street, address_City,address_Province, address_Country, postal_code_text;
+    private EditText firstName_text, lastName_text, email_text, password_text, repeat_password_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +50,6 @@ public class signUp_activity extends AppCompatActivity {
         email_text = findViewById(R.id.email_text);
         password_text = findViewById(R.id.password_text);
         repeat_password_text = findViewById(R.id.repeat_password_text);
-        address_Street = findViewById(R.id.address_Street);
-        address_City = findViewById(R.id.address_City);
-        address_Province = findViewById(R.id.address_Province);
-        address_Country = findViewById(R.id.address_Country);
-        postal_code_text = findViewById(R.id.postal_code_text);
 
         Button signUp = findViewById(R.id.signUp_button);
         signUp.setOnClickListener(view -> register());
@@ -71,15 +66,9 @@ public class signUp_activity extends AppCompatActivity {
         String email = email_text.getText().toString().trim();
         String password = password_text.getText().toString().trim();
         String repeatPassword = repeat_password_text.getText().toString().trim();
-        String address_street = address_Street.getText().toString().trim();
-        String address_city = address_City.getText().toString().trim();
-        String address_province = address_Province.getText().toString().trim();
-        String address_country = address_Country.getText().toString().trim();
 
 
-        String postal_code = postal_code_text.getText().toString().trim();
-
-        if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty() || address_street.isEmpty() || address_city.isEmpty() || address_province.isEmpty() || address_country.isEmpty() || postal_code.isEmpty()){
+        if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()){
             Toast.makeText(this, "Please Fill all the details", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -100,7 +89,7 @@ public class signUp_activity extends AppCompatActivity {
             if(task.isSuccessful()){
                 FirebaseUser user = signUpAuth.getCurrentUser();
                 if(user != null){
-                    saveUserToDatabase(user.getUid(), firstName, lastName, email, address_street, address_city, address_province, address_country, postal_code);
+                    saveUserToDatabase(user.getUid(), firstName, lastName, email);
                     Toast.makeText(signUp_activity.this, "Registration Successfull", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(signUp_activity.this, login_activity.class);
@@ -114,16 +103,11 @@ public class signUp_activity extends AppCompatActivity {
         });
     }
 
-    private void saveUserToDatabase(String userId, String firstName, String lastName, String email, String address_street, String address_city, String address_province, String address_country, String postal_code) {
+    private void saveUserToDatabase(String userId, String firstName, String lastName, String email) {
         Map<String, Object> userDetails = new HashMap<>();
         userDetails.put("firstName", firstName);
         userDetails.put("lastName", lastName);
         userDetails.put("email", email);
-        userDetails.put("address_street", address_street);
-        userDetails.put("address_city", address_city);
-        userDetails.put("address_province", address_province);
-        userDetails.put("address_country", address_country);
-        userDetails.put("postal_code", postal_code);
 
         databaseReference.child(userId).setValue(userDetails).addOnCompleteListener(task -> {
             if(task.isSuccessful()){

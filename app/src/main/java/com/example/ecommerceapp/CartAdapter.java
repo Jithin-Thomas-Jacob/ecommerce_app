@@ -1,5 +1,6 @@
 package com.example.ecommerceapp;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         Glide.with(holder.productImage.getContext())
                 .load(item.getImage())
                 .into(holder.productImage);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), details_activity.class);
+            intent.putExtra("productId", item.getId());
+            intent.putExtra("productTitle", item.getTitle());
+            intent.putExtra("productPrice", item.getPrice());
+            intent.putExtra("productImage", item.getImage());
+            intent.putExtra("productDescription", item.getDescription());
+            intent.putExtra("itemDetails", item.getItemDetails());
+            holder.itemView.getContext().startActivity(intent);
+        });
 
         // Handle increase quantity
         holder.increaseQuantity.setOnClickListener(v -> {
