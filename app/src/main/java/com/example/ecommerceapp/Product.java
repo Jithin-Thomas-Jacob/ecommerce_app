@@ -4,20 +4,24 @@ public class Product {
 
     private String id;
     private String title;
-    private int price;
+    private double price;
     private String image;
     private boolean inCart;
     private int quantity;
+    private String description;
+    private String itemDetails;
 
     public Product() {}
 
-    public Product(String id, String title, int price, String image){
+    public Product(String id, String title, double price, String image, String description, String itemDetails){
         this.id = id;
         this.title = title;
         this.price = price;
         this.image = image;
         this.inCart = false;
         this.quantity = 0;
+        this.itemDetails = itemDetails;
+        this.description = description;
     }
 
     public String getId(){
@@ -27,11 +31,19 @@ public class Product {
     public String getTitle(){
         return title;
     }
-    public int getPrice(){
+    public double getPrice(){
         return price;
     }
     public String getImage(){
         return image;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public String getItemDetails(){
+        return itemDetails;
     }
 
     public boolean isInCart() {

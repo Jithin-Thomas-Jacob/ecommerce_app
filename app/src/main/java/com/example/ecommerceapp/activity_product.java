@@ -80,6 +80,8 @@ public class activity_product extends AppCompatActivity {
 
                                     String title = (String) productMap.get("title");
                                     String image = (String) productMap.get("image");
+                                    String description = (String) productMap.get("description");
+                                    String itemDetails = (String) productMap.get("itemDetails");
 
                                     Object priceObject = productMap.get("price");
                                     int price = 0;
@@ -93,7 +95,7 @@ public class activity_product extends AppCompatActivity {
                                         }
                                     }
 
-                                    Product product = new Product(Id, title, price, image);
+                                    Product product = new Product(Id, title, price, image, description, itemDetails);
                                     productList.add(product);
                                 }
                             }

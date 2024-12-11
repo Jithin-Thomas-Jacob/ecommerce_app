@@ -39,7 +39,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         Log.d("CartAdapter", "Binding item: " + item.getTitle()); // Debugging
 
         holder.productTitle.setText(item.getTitle());
-        holder.productPrice.setText("Price: $" + item.getPrice());
+        holder.productPrice.setText("Price: $" + String.format("%.2f", item.getPrice()));
+
         holder.quantityText.setText(String.valueOf(item.getQuantity()));
         Glide.with(holder.productImage.getContext())
                 .load(item.getImage())

@@ -1,6 +1,7 @@
 package com.example.ecommerceapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +40,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         // Set product details
         holder.textViewName.setText(product.getTitle());
-        holder.textViewPrice.setText("$" + product.getPrice());
+        holder.textViewPrice.setText("Price: $" + String.format("%.2f", product.getPrice()));
 
         Glide.with(context)
                 .load(product.getImage())
                 .placeholder(R.drawable.product_1)
                 .error(R.drawable.starting_img)
                 .into(holder.imageViewProduct);
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, details_activity.class);
+            intent.putExtra("productId", product.getId());
+            intent.putExtra("productTitle", product.getTitle());
+            intent.putExtra("productPrice", product.getPrice());
+            intent.putExtra("productImage", product.getImage());
+            intent.putExtra("productDescription", product.getDescription());
+            intent.putExtra("productDetails", product.getItemDetails());
+            context.startActivity(intent);
+        });
 
         // Get the cart item from CartManager
         CartItem cartItem = CartManager.getInstance().getCart().get(product.getId());

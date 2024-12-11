@@ -4,11 +4,11 @@ public class CartItem {
 
     private String Id;
     private String title;
-    private int price;
+    private double price;
     private String image;
     private int quantity;
 
-    public CartItem(String Id ,String title, String image, int price, int quantity){
+    public CartItem(String Id ,String title, String image, double price, int quantity){
         this.Id = Id;
         this.title = title;
         this.image = image;
@@ -28,7 +28,7 @@ public class CartItem {
         return image;
     }
 
-    public int getPrice(){
+    public double getPrice(){
         return price;
     }
 
