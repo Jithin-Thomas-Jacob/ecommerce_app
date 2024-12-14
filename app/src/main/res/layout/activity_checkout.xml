@@ -28,18 +28,6 @@
             android:layout_marginBottom="5dp"
             android:src="@drawable/back_button" />
 
-        <!-- Spacer to create a gap -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:contentDescription="Cart Icon"
-            android:src="@drawable/cart_img" />
     </LinearLayout>
 
     <!-- Scrollable Content -->
@@ -55,63 +43,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="16dp">
-
-            <!-- Order Summary -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Order Summary"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/product_img"
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:layout_marginEnd="12dp"
-                            android:contentDescription="Product Image"
-                            android:src="@drawable/product_1" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Modern Elegance Bookcase Shelf"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Total: $10.30"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
             <!-- Delivery Address -->
             <androidx.cardview.widget.CardView
@@ -135,6 +66,7 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
+                    <!-- Address Fields -->
                     <EditText
                         android:id="@+id/address_street_input"
                         android:layout_width="match_parent"
@@ -179,15 +111,6 @@
                         android:textSize="14sp"
                         android:backgroundTint="@color/primary" />
 
-                    <Button
-                        android:id="@+id/save_address_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:backgroundTint="@color/primary"
-                        android:text="Save Address"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -224,7 +147,7 @@
                             android:id="@+id/radio_card_payment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pay by Card"
+                            android:text="Pay by Debit/Credit Card"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -239,6 +162,143 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Card Details -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/card_details_layout"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:weightSum="1">
+
+                    <!-- Card Number -->
+                    <TextView
+                        android:id="@+id/card_number_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Card Number"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <EditText
+                        android:id="@+id/card_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter your card number"
+                        android:inputType="number"
+                        android:maxLength="19"
+                        android:padding="12dp"
+                        android:layout_marginBottom="16dp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+
+                    <!-- Cardholder Name -->
+                    <TextView
+                        android:id="@+id/cardholder_name_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cardholder Name"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <EditText
+                        android:id="@+id/cardholder_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter cardholder's name"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:layout_marginBottom="16dp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+
+                    <!-- Expiry and CVV (Side by Side) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp"
+                        android:padding="12dp">
+
+                        <!-- Expiry Date -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/expiry_date_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Expiration Date"
+                                android:textSize="14sp"
+                                android:textColor="@color/black"
+                                android:layout_marginBottom="4dp"
+                                android:fontFamily="sans-serif-medium" />
+
+                            <EditText
+                                android:id="@+id/expiry_details"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="MM/YY"
+                                android:inputType="number"
+                                android:maxLength="5"
+                                android:padding="12dp"
+                                android:backgroundTint="@color/primary"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"/>
+
+                        </LinearLayout>
+
+                        <!-- CVV -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/cvv_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CVV"
+                                android:textSize="14sp"
+                                android:textColor="@color/black"
+                                android:layout_marginBottom="4dp"
+                                android:fontFamily="sans-serif-medium" />
+
+                            <EditText
+                                android:id="@+id/cvv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CVV"
+                                android:inputType="numberPassword"
+                                android:maxLength="3"
+                                android:padding="12dp"
+                                android:backgroundTint="@color/primary"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
             <!-- Confirm Order Section -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -246,6 +306,26 @@
                 android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/subtotal_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Sub Total: $30.30"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tax_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Tax: $5.30"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/total_price"

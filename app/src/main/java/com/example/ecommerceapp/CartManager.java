@@ -8,6 +8,7 @@ public class CartManager {
 
     private static CartManager instance;
     private HashMap<String, CartItem> cart;
+    private static final double TAX_RATE = 0.13; // 13% tax
 
     private CartManager(){
         cart = new HashMap<>();
@@ -34,7 +35,6 @@ public class CartManager {
         Log.d("CartManager", "Cart contents: " + cart);
     }
 
-
     public void updateQuantity(String productId, int quantity) {
         if (cart.containsKey(productId)) {
             cart.get(productId).setQuantity(quantity);
@@ -48,5 +48,26 @@ public class CartManager {
     public HashMap<String, CartItem> getCart() {
         return cart;
     }
-}
 
+    // Calculate subtotal, tax, and total price
+    public double[] getCartPriceDetails() {
+        double subTotal = 0.0;
+
+        // Calculate subtotal
+        for (CartItem item : cart.values()) {
+            subTotal += item.getPrice() * item.getQuantity();
+        }
+
+        // Calculate tax and total
+        double tax = subTotal * TAX_RATE;
+        double total = subTotal + tax;
+
+        return new double[]{subTotal, tax, total};
+    }
+
+    public void clearCart() {
+        cart.clear();
+        Log.d("CartManager", "Cart cleared after purchase.");
+    }
+
+}

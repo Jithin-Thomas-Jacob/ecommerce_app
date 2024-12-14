@@ -1,6 +1,7 @@
 package com.example.ecommerceapp;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -40,7 +41,9 @@ public class activity_product extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.viewProducts);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
+        recyclerView.setLayoutManager(new GridLayoutManager(this, spanCount));
+
 
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(this, this.productList);

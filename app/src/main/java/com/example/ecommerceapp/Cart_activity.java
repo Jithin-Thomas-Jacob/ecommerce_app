@@ -1,9 +1,11 @@
 package com.example.ecommerceapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -12,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +25,7 @@ public class Cart_activity extends AppCompatActivity {
     private TextView subTotalTextView, taxTextView, totalPriceTextView, emptyCartMessage;
     private CartAdapter cartAdapter;
     private List<CartItem> cartItems;
-
-    private static final double TAX_RATE = 0.13; // 13% tax
+    private ImageView backButtonView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,16 @@ public class Cart_activity extends AppCompatActivity {
             return insets;
         });
 
+        backButtonView = findViewById(R.id.backButton);
         cartRecyclerView = findViewById(R.id.cartRecyclerView);
         subTotalTextView = findViewById(R.id.subTotalPrice);
         taxTextView = findViewById(R.id.tax);
         totalPriceTextView = findViewById(R.id.totalPrice);
         emptyCartMessage = findViewById(R.id.emptyCartMessage);
+
+        backButtonView.setOnClickListener(v -> {
+            finish();
+        });
 
         cartItems = new ArrayList<>(CartManager.getInstance().getCart().values());
         Log.d("CartActivity", "Cart items: " + cartItems);
@@ -51,6 +58,27 @@ public class Cart_activity extends AppCompatActivity {
 
         updateCartUI();
         updateTotalPrice();
+
+        Button checkoutButton = findViewById(R.id.checkoutButton);
+        checkoutButton.setOnClickListener(v -> {
+            // Check if the cart is empty
+            if (cartItems.isEmpty()) {
+                Toast.makeText(Cart_activity.this, "Your cart is empty. Please add items to the cart before proceeding to checkout.", Toast.LENGTH_SHORT).show();
+            } else {
+                // Get the price details from CartManager
+                double[] priceDetails = CartManager.getInstance().getCartPriceDetails();
+                double subTotal = priceDetails[0];
+                double tax = priceDetails[1];
+                double total = priceDetails[2];
+
+                // Create an Intent and pass the price details
+                Intent intent = new Intent(Cart_activity.this, activity_checkout.class);
+                intent.putExtra("subtotal_price", subTotal);
+                intent.putExtra("tax_price", tax);
+                intent.putExtra("total_price", total);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateCartUI() {
@@ -63,23 +91,16 @@ public class Cart_activity extends AppCompatActivity {
             emptyCartMessage.setVisibility(View.GONE);
             cartRecyclerView.setVisibility(View.VISIBLE);
         }
-
-        updateTotalPrice();
     }
 
     private void updateTotalPrice() {
-        double subTotal = 0.0;
+        // Get the price details from CartManager
+        double[] priceDetails = CartManager.getInstance().getCartPriceDetails();
+        double subTotal = priceDetails[0];
+        double tax = priceDetails[1];
+        double total = priceDetails[2];
 
-        // Calculate subtotal
-        for (CartItem item : cartItems) {
-            subTotal += item.getPrice() * item.getQuantity();
-        }
-
-        // Calculate tax and total
-        double tax = subTotal * TAX_RATE;
-        double total = subTotal + tax;
-
-        // Update UI
+        // Update UI with the calculated values
         subTotalTextView.setText(String.format("Sub Total: $%.2f", subTotal));
         taxTextView.setText(String.format("Tax: $%.2f", tax));
         totalPriceTextView.setText(String.format("Total: $%.2f", total));
@@ -97,7 +118,7 @@ public class Cart_activity extends AppCompatActivity {
         // Notify adapter of data change
         cartAdapter.notifyDataSetChanged();
 
-        // Update the total price
+        // Update the UI and total price
         updateCartUI();
         updateTotalPrice();
     }

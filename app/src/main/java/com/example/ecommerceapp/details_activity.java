@@ -2,8 +2,10 @@ package com.example.ecommerceapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-
 
 public class details_activity extends AppCompatActivity {
 
@@ -30,17 +31,11 @@ public class details_activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         ImageView backButton = findViewById(R.id.backButton);
         String source = getIntent().getStringExtra("source");
 
         backButton.setOnClickListener(v -> {
-            if ("CartActivity".equals(source)){
-                Intent intent = new Intent(details_activity.this, Cart_activity.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(details_activity.this, activity_product.class);
-                startActivity(intent);
-            }
             finish();
         });
 
@@ -62,7 +57,10 @@ public class details_activity extends AppCompatActivity {
         TextView productDescriptionView = findViewById(R.id.product_description);
         TextView productDetailsView = findViewById(R.id.product_details);
         Button addToCartButton = findViewById(R.id.add_to_cart_button);
-        Button buyNowButton = findViewById(R.id.buy_now_button);
+        LinearLayout quantityLayout = findViewById(R.id.quantity_layout);
+        TextView quantityText = findViewById(R.id.quantity_text);
+        Button decreaseButton = findViewById(R.id.decrease_button);
+        Button increaseButton = findViewById(R.id.increase_button);
 
         // Populate UI with product details
         productTitleView.setText(productTitle != null ? productTitle : "No Title");
@@ -83,10 +81,10 @@ public class details_activity extends AppCompatActivity {
         });
 
         // Check if the product is already in the cart
-        final CartItem cartItem = cartManager.getCart().get(productId);
+        CartItem cartItem = cartManager.getCart().get(productId);
 
-        // Update the button state
-        updateCartButtonState(addToCartButton, cartItem);
+        // Update the button or show quantity layout
+        updateUIState(addToCartButton, quantityLayout, quantityText, cartItem);
 
         // Add to Cart button logic
         addToCartButton.setOnClickListener(v -> {
@@ -97,27 +95,65 @@ public class details_activity extends AppCompatActivity {
                 // Increase the quantity if less than 10
                 cartManager.updateQuantity(productId, cartItem.getQuantity() + 1);
             } else {
-                // Display a message if the maximum limit is reached
                 Toast.makeText(this, "Maximum limit reached", Toast.LENGTH_SHORT).show();
+                return;
             }
-            // Update the button state after changes
-            updateCartButtonState(addToCartButton, cartItem);
-            Toast.makeText(this, "Added To Cart", Toast.LENGTH_SHORT).show();
+
+            // Update UI after adding to cart
+            CartItem updatedCartItem = cartManager.getCart().get(productId);
+            updateUIState(addToCartButton, quantityLayout, quantityText, updatedCartItem);
+            Toast.makeText(this, "Added to Cart", Toast.LENGTH_SHORT).show();
         });
 
-        // Buy Now button logic
-        buyNowButton.setOnClickListener(v -> {
-            // Display a message for now, implement Buy Now functionality later
+        // Increase quantity logic
+        increaseButton.setOnClickListener(v -> {
+            CartItem selectedCartItem = cartManager.getCart().get(productId);
+            if (selectedCartItem != null && selectedCartItem.getQuantity() < 10) {
+                cartManager.updateQuantity(productId, selectedCartItem.getQuantity() + 1);
+                quantityText.setText(String.valueOf(selectedCartItem.getQuantity()));
+            } else {
+                Toast.makeText(this, "Maximum limit reached", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        // Decrease quantity logic
+        decreaseButton.setOnClickListener(v -> {
+            CartItem selectedCartItem = cartManager.getCart().get(productId);
+            if (selectedCartItem != null && selectedCartItem.getQuantity() > 1) {
+                cartManager.updateQuantity(productId, selectedCartItem.getQuantity() - 1);
+                quantityText.setText(String.valueOf(selectedCartItem.getQuantity()));
+            } else if (selectedCartItem != null && selectedCartItem.getQuantity() == 1) {
+                cartManager.removeFromCart(productId);
+                updateUIState(addToCartButton, quantityLayout, quantityText, null);
+                Toast.makeText(this, "Item removed from cart", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
-    // Helper method to update the Add to Cart button text
-    private void updateCartButtonState(Button addToCartButton, CartItem cartItem) {
+    // Helper method to update the Add to Cart button or show quantity controls
+    private void updateUIState(Button addToCartButton, LinearLayout quantityLayout, TextView quantityText, CartItem cartItem) {
         if (cartItem == null || cartItem.getQuantity() == 0) {
-            addToCartButton.setText("Add to Cart");
+            addToCartButton.setVisibility(View.VISIBLE);
+            quantityLayout.setVisibility(View.GONE);
         } else {
-            addToCartButton.setText("In Cart (" + cartItem.getQuantity() + ")");
+            addToCartButton.setVisibility(View.GONE);
+            quantityLayout.setVisibility(View.VISIBLE);
+            quantityText.setText(String.valueOf(cartItem.getQuantity()));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String productId = getIntent().getStringExtra("productId");
+
+        CartItem cartItem = cartManager.getCart().get(productId);
+
+        Button addToCartButton = findViewById(R.id.add_to_cart_button);
+        LinearLayout quantityLayout = findViewById(R.id.quantity_layout);
+        TextView quantityText = findViewById(R.id.quantity_text);
+
+        updateUIState(addToCartButton, quantityLayout, quantityText, cartItem);
     }
 }
