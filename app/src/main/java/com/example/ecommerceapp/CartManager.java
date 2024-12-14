@@ -8,7 +8,7 @@ public class CartManager {
 
     private static CartManager instance;
     private HashMap<String, CartItem> cart;
-    private static final double TAX_RATE = 0.13; // 13% tax
+    private static final double TAX_RATE = 0.13;
 
     private CartManager(){
         cart = new HashMap<>();
@@ -24,11 +24,11 @@ public class CartManager {
     public void addToCart(CartItem item) {
         String productId = item.getId();
         if (cart.containsKey(productId)) {
-            // If product exists, just update the quantity
+
             CartItem existingItem = cart.get(productId);
             existingItem.setQuantity(existingItem.getQuantity() + item.getQuantity());
         } else {
-            // Add as a new item
+
             cart.put(productId, item);
             Log.d("CartManager", "Added new item to cart: " + item.getTitle());
         }
@@ -49,16 +49,14 @@ public class CartManager {
         return cart;
     }
 
-    // Calculate subtotal, tax, and total price
+
     public double[] getCartPriceDetails() {
         double subTotal = 0.0;
 
-        // Calculate subtotal
         for (CartItem item : cart.values()) {
             subTotal += item.getPrice() * item.getQuantity();
         }
 
-        // Calculate tax and total
         double tax = subTotal * TAX_RATE;
         double total = subTotal + tax;
 

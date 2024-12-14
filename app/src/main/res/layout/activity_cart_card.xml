@@ -14,7 +14,6 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <!-- Product Image -->
         <ImageView
             android:id="@+id/productImage"
             android:layout_width="80dp"
@@ -23,14 +22,12 @@
             android:scaleType="centerCrop"
             android:contentDescription="Product Image" />
 
-        <!-- Details Section -->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <!-- Product Title -->
             <TextView
                 android:id="@+id/productTitle"
                 android:layout_width="wrap_content"
@@ -40,7 +37,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <!-- Product Price -->
             <TextView
                 android:id="@+id/productPrice"
                 android:layout_width="wrap_content"
@@ -49,7 +45,6 @@
                 android:text="Price: $0.00"
                 android:textSize="14sp" />
 
-            <!-- Quantity Controls -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +52,6 @@
                 android:gravity="center_vertical"
                 android:layout_marginTop="8dp">
 
-                <!-- Decrease Quantity Button -->
                 <Button
                     android:id="@+id/decreaseQuantity"
                     android:layout_width="40dp"
@@ -72,7 +66,6 @@
                     android:minHeight="40dp"
                     android:layout_marginEnd="8dp" />
 
-                <!-- Quantity Display -->
                 <TextView
                     android:id="@+id/quantityText"
                     android:layout_width="40dp"
@@ -84,7 +77,6 @@
                     android:textColor="@android:color/black"
                     android:layout_marginHorizontal="8dp" />
 
-                <!-- Increase Quantity Button -->
                 <Button
                     android:id="@+id/increaseQuantity"
                     android:layout_width="40dp"
@@ -102,7 +94,6 @@
 
         </LinearLayout>
 
-        <!-- Remove Button -->
         <Button
             android:id="@+id/removeButton"
             android:layout_width="wrap_content"

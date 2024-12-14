@@ -38,7 +38,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
 
-        // Set product details
         holder.textViewName.setText(product.getTitle());
         holder.textViewPrice.setText("Price: $" + String.format("%.2f", product.getPrice()));
 
@@ -59,29 +58,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             context.startActivity(intent);
         });
 
-        // Get the cart item from CartManager
         CartItem cartItem = CartManager.getInstance().getCart().get(product.getId());
 
         if (cartItem != null) {
-            // If the product is in the cart, show the quantity controls
             holder.buttonAddToCart.setVisibility(View.GONE);
             holder.layoutQuantity.setVisibility(View.VISIBLE);
             holder.textQuantity.setText(String.valueOf(cartItem.getQuantity()));
         } else {
-            // If the product is not in the cart, show the "Add to Cart" button
+
             holder.buttonAddToCart.setVisibility(View.VISIBLE);
             holder.layoutQuantity.setVisibility(View.GONE);
         }
 
-        // "Add to Cart" button logic
         holder.buttonAddToCart.setOnClickListener(view -> {
             CartManager.getInstance().addToCart(
                     new CartItem(product.getId(), product.getTitle(), product.getImage(), product.getPrice(), 1, product.getDescription(), product.getItemDetails())
             );
-            notifyItemChanged(position); // Refresh the UI
+            notifyItemChanged(position);
         });
 
-        // "+" Button Logic (Increase Quantity)
         holder.buttonIncrease.setOnClickListener(view -> {
             if (cartItem != null) {
                 int newQuantity = cartItem.getQuantity() + 1;
@@ -94,18 +89,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
         });
 
-        // "-" Button Logic (Decrease Quantity or Remove from Cart)
         holder.buttonDecrease.setOnClickListener(view -> {
             if (cartItem != null) {
                 if (cartItem.getQuantity() > 1) {
-                    // Decrease quantity
+
                     int newQuantity = cartItem.getQuantity() - 1;
                     CartManager.getInstance().updateQuantity(product.getId(), newQuantity);
                 } else {
-                    // Remove product from cart
+
                     CartManager.getInstance().removeFromCart(product.getId());
                 }
-                notifyItemChanged(position); // Refresh the UI
+                notifyItemChanged(position);
             }
         });
     }

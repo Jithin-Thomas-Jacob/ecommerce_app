@@ -9,7 +9,6 @@
     tools:context=".activity_checkout"
     android:background="@color/white">
 
-    <!-- Header -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -20,7 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Back Button -->
         <ImageView
             android:id="@+id/backButton"
             android:layout_width="53dp"
@@ -30,7 +28,6 @@
 
     </LinearLayout>
 
-    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -44,7 +41,6 @@
             android:orientation="vertical"
             android:paddingBottom="16dp">
 
-            <!-- Delivery Address -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +62,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <!-- Address Fields -->
                     <EditText
                         android:id="@+id/address_street_input"
                         android:layout_width="match_parent"
@@ -114,7 +109,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Payment Method -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,7 +156,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Card Details -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,7 +171,6 @@
                     android:padding="16dp"
                     android:weightSum="1">
 
-                    <!-- Card Number -->
                     <TextView
                         android:id="@+id/card_number_label"
                         android:layout_width="wrap_content"
@@ -202,7 +194,6 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"/>
 
-                    <!-- Cardholder Name -->
                     <TextView
                         android:id="@+id/cardholder_name_label"
                         android:layout_width="wrap_content"
@@ -225,7 +216,6 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"/>
 
-                    <!-- Expiry and CVV (Side by Side) -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -233,7 +223,6 @@
                         android:layout_marginBottom="16dp"
                         android:padding="12dp">
 
-                        <!-- Expiry Date -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -264,7 +253,6 @@
 
                         </LinearLayout>
 
-                        <!-- CVV -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -299,7 +287,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Confirm Order Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

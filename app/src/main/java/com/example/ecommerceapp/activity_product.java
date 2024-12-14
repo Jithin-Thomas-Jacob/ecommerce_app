@@ -81,11 +81,11 @@ public class activity_product extends AppCompatActivity {
                                     String Id;
                                     Object idObject = productMap.get("id");
                                     if (idObject instanceof Long) {
-                                        Id = String.valueOf(idObject); // Convert Long to String
+                                        Id = String.valueOf(idObject);
                                     } else if (idObject instanceof String) {
                                         Id = (String) idObject;
                                     } else {
-                                        Id = ""; // Default to empty if type is unsupported
+                                        Id = "";
                                     }
 
                                     String title = (String) productMap.get("title");
